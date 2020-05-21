@@ -1,17 +1,16 @@
-const fs = require('fs');
-const readline = require('readline');
+const fs = require("fs");
 
-async function processLineByLine() {
-  const fileStream = fs.createReadStream('./dictionary/test-words.txt');
-
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity
-  });
-
-  for await (const line of rl) {
-    
-    console.log(line.split("").reverse().join(""));
+fs.readFile('./dictionary/test-words.txt', function (err, data) {
+  if (err) {
+     return console.error(err);
   }
-}
-processLineByLine();
+  const wordArray = data.toString().split('\r\n');
+    let charArray = [];
+    for (word in wordArray) {
+      charArray += word.split('')
+    }
+
+
+  console.log(wordArray);
+  console.log(charArray);
+});
